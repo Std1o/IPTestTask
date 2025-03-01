@@ -1,4 +1,4 @@
-package com.stdio.iptesttask.ui.theme
+package com.stdio.iptesttask.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

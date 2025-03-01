@@ -1,4 +1,4 @@
-package com.stdio.iptesttask.ui.theme
+package com.stdio.iptesttask.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
