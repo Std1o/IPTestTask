@@ -4,4 +4,8 @@
     <string name="amount_dialog">Количество товара</string>
     <string name="apply">Принять</string>
     <string name="cancel">Отмена</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="deletion_dialog_title">Удаление товара</string>
+    <string name="deletion_dialog_description">Вы действительно хотите удалить выбранный товар?</string>
 </resources>

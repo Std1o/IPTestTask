@@ -22,4 +22,10 @@ class ProductViewModel @Inject constructor(
             repository.updateProduct(item.copy(amount = amount))
         }
     }
+
+    fun deleteItem(item: Item) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteProduct(item)
+        }
+    }
 }

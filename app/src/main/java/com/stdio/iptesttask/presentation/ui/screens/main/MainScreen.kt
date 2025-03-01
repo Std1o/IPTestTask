@@ -30,6 +30,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<ProductViewModel>()
     val list = viewModel.allProducts.collectAsState(emptyList()).value
     var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
+    var showDeleteItemDialog by rememberSaveable { mutableStateOf(false) }
     var selectedItem by rememberSaveable { mutableStateOf(Item(0, "", 0, "", 0)) }
     var selectedAmount by rememberSaveable { mutableIntStateOf(0) }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
@@ -48,7 +49,10 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
-                    MainFirstRow(item) { amount, item ->
+                    MainFirstRow(item, onDelete = {
+                        showDeleteItemDialog = true
+                        selectedItem = it
+                    }) { amount, item ->
                         showChangeAmountDialog = true
                         selectedAmount = amount
                         selectedItem = item
@@ -66,6 +70,14 @@ fun MainScreen(modifier: Modifier = Modifier) {
             onDismissRequest = { showChangeAmountDialog = false }) {
             selectedAmount = it
             viewModel.updateAmount(it, selectedItem)
+        }
+    }
+
+    if (showDeleteItemDialog) {
+        AlertDeleteItemDialog(
+            item = selectedItem,
+            onDismissRequest = { showDeleteItemDialog = false }) {
+            viewModel.deleteItem(it)
         }
     }
 }
