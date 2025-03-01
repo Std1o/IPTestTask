@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -99,9 +100,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                     ) {
                         item.tags.split(",").forEach { tag ->
                             OutlinedButton(
+                                modifier = Modifier.height(30.dp),
                                 onClick = {}, shape = RoundedCornerShape(16),
                                 contentPadding = PaddingValues(
-                                    10.dp
+                                    vertical = 0.dp,
+                                    horizontal = 10.dp
                                 )
                             ) {
                                 Text(
