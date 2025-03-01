@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDAO {
-    @Query("SELECT * FROM Item")
-    fun getAllProducts(): Flow<List<Item>>
+    @Query("SELECT * FROM Item WHERE name LIKE '%' || :prefix || '%'")
+    fun getFilteredProducts(prefix: String): Flow<List<Item>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: Item)

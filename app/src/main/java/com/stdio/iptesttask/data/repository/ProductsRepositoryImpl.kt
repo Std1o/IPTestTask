@@ -12,12 +12,12 @@ import javax.inject.Inject
 class ProductsRepositoryImpl @Inject constructor(private val productDAO: ProductDAO) :
     ProductsRepository {
 
-    override val allProducts: Flow<List<ItemDomain>> = productDAO.getAllProducts().map { list ->
-        list.map { item ->
-            val itemMapper = ItemMapper()
-            itemMapper.map(item)
+    override fun allProducts(prefix: String): Flow<List<ItemDomain>> = productDAO.getFilteredProducts(prefix).map { list ->
+            list.map { item ->
+                val itemMapper = ItemMapper()
+                itemMapper.map(item)
+            }
         }
-    }
 
     override suspend fun updateProduct(item: ItemDomain) {
         val itemReverseMapper = ItemReverseMapper()

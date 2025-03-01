@@ -14,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -28,7 +29,7 @@ import com.stdio.iptesttask.presentation.viewmodel.ProductViewModel
 @Composable
 fun MainScreen() {
     val viewModel = hiltViewModel<ProductViewModel>()
-    val list = viewModel.allProducts.collectAsState(emptyList()).value
+    val list = viewModel.items.collectAsState(emptyList()).value
     var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
     var showDeleteItemDialog by rememberSaveable { mutableStateOf(false) }
     var selectedItem by rememberSaveable { mutableStateOf(ItemDomain(0, "", "", emptyList(), 0)) }
@@ -36,7 +37,7 @@ fun MainScreen() {
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = {
             SearchAppBar {
-
+                viewModel.prefix = it
             }
         }) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
