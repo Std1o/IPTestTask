@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.stdio.iptesttask.domain.model.ItemDomain
 
@@ -19,6 +21,7 @@ fun MainSecondRow(item: ItemDomain) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(7.dp),
         verticalArrangement = Arrangement.spacedBy(7.dp),
+        modifier = Modifier.padding(vertical = 8.dp)
     ) {
         item.tags.forEach { tag ->
             OutlinedButton(
@@ -29,7 +32,7 @@ fun MainSecondRow(item: ItemDomain) {
                     horizontal = 10.dp
                 )
             ) {
-                Text(tag)
+                Text(tag, color = Color.Black)
             }
         }
     }
