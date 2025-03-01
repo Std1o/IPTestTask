@@ -39,8 +39,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.stdio.iptesttask.extensions.iTems
 import com.stdio.iptesttask.presentation.viewmodel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.sql.Date
 import java.text.SimpleDateFormat
+import java.util.Date
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -125,7 +125,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                         }
                         Column(modifier = Modifier.align(Alignment.CenterEnd)) {
                             Text("Дата добавления", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
-                            Text(convertLongToTime(item.time.toLong()), fontSize = 13.5.sp)
+                            Text(convertLongToTime(item.time), fontSize = 13.5.sp)
                         }
                     }
                 }
