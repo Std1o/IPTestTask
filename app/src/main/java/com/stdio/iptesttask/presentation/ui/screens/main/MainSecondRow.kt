@@ -11,16 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.stdio.iptesttask.domain.model.Item
+import com.stdio.iptesttask.domain.model.ItemDomain
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun MainSecondRow(item: Item) {
+fun MainSecondRow(item: ItemDomain) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(7.dp),
         verticalArrangement = Arrangement.spacedBy(7.dp),
     ) {
-        item.tags.split(",").forEach { tag ->
+        item.tags.forEach { tag ->
             OutlinedButton(
                 modifier = Modifier.height(30.dp),
                 onClick = {}, shape = RoundedCornerShape(16),
@@ -29,11 +29,7 @@ fun MainSecondRow(item: Item) {
                     horizontal = 10.dp
                 )
             ) {
-                Text(
-                    tag.replace("[", "")
-                        .replace("\"", "")
-                        .replace("]", "")
-                )
+                Text(tag)
             }
         }
     }

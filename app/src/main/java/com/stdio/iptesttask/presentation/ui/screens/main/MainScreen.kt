@@ -18,12 +18,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.stdio.iptesttask.domain.model.Item
+import com.stdio.iptesttask.domain.model.ItemDomain
 import com.stdio.iptesttask.extensions.iTems
 import com.stdio.iptesttask.presentation.ui.theme.White
 import com.stdio.iptesttask.presentation.viewmodel.ProductViewModel
-import java.text.SimpleDateFormat
-import java.util.Date
 
 @Composable
 fun MainScreen(modifier: Modifier = Modifier) {
@@ -31,7 +29,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     val list = viewModel.allProducts.collectAsState(emptyList()).value
     var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
     var showDeleteItemDialog by rememberSaveable { mutableStateOf(false) }
-    var selectedItem by rememberSaveable { mutableStateOf(Item(0, "", 0, "", 0)) }
+    var selectedItem by rememberSaveable { mutableStateOf(ItemDomain(0, "", "", emptyList(), 0)) }
     var selectedAmount by rememberSaveable { mutableIntStateOf(0) }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         iTems(list, key = { it }) { item ->
@@ -80,10 +78,4 @@ fun MainScreen(modifier: Modifier = Modifier) {
             viewModel.deleteItem(it)
         }
     }
-}
-
-fun convertLongToTime(time: Long): String {
-    val date = Date(time)
-    val format = SimpleDateFormat("dd.MM.yyyy")
-    return format.format(date)
 }

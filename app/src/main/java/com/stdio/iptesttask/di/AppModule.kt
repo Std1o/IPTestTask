@@ -3,7 +3,7 @@ package com.stdio.iptesttask.di
 import android.content.Context
 import com.stdio.iptesttask.data.ProductDAO
 import com.stdio.iptesttask.data.ProductsDB
-import com.stdio.iptesttask.data.ProductsRepositoryImpl
+import com.stdio.iptesttask.data.repository.ProductsRepositoryImpl
 import com.stdio.iptesttask.domain.repository.ProductsRepository
 import dagger.Module
 import dagger.Provides

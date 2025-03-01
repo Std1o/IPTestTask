@@ -9,10 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.stdio.iptesttask.domain.model.Item
+import com.stdio.iptesttask.domain.model.ItemDomain
 
 @Composable
-fun MainThirdRow(item: Item) {
+fun MainThirdRow(item: ItemDomain) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Column {
             Text("На складе", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
@@ -20,7 +20,7 @@ fun MainThirdRow(item: Item) {
         }
         Column(modifier = Modifier.align(Alignment.CenterEnd)) {
             Text("Дата добавления", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
-            Text(convertLongToTime(item.time), fontSize = 13.5.sp)
+            Text(item.time, fontSize = 13.5.sp)
         }
     }
 }

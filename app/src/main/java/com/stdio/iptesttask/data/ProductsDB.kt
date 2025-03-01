@@ -5,9 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.stdio.iptesttask.domain.model.Item
+import com.stdio.iptesttask.data.model.Item
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 @Database(entities = [Item::class], version = 1, exportSchema = true)
 abstract class ProductsDB : RoomDatabase() {

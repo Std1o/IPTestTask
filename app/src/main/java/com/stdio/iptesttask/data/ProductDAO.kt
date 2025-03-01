@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.stdio.iptesttask.domain.model.Item
+import com.stdio.iptesttask.data.model.Item
 import kotlinx.coroutines.flow.Flow
 
 @Dao

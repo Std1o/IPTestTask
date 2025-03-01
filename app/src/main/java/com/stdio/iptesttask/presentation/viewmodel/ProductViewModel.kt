@@ -2,7 +2,7 @@ package com.stdio.iptesttask.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.stdio.iptesttask.domain.model.Item
+import com.stdio.iptesttask.domain.model.ItemDomain
 import com.stdio.iptesttask.domain.repository.ProductsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,13 +17,13 @@ class ProductViewModel @Inject constructor(
 
     val allProducts = repository.allProducts
 
-    fun updateAmount(amount: Int, item: Item) {
+    fun updateAmount(amount: Int, item: ItemDomain) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.updateProduct(item.copy(amount = amount))
         }
     }
 
-    fun deleteItem(item: Item) {
+    fun deleteItem(item: ItemDomain) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteProduct(item)
         }
