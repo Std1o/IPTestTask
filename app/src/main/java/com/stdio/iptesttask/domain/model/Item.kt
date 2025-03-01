@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity
-class Item(val name: String, val time: String, val amount: Int) : Parcelable{
+class Item(val name: String, val time: String, val tags: String, val amount: Int) : Parcelable{
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }
