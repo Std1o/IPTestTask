@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDAO {
-    @Query("SELECT * FROM Item ORDER BY name ASC")
-    fun getAlphabetizedContacts(): Flow<List<Item>>
+    @Query("SELECT * FROM Item ORDER BY time ASC")
+    fun getAllProducts(): Flow<List<Item>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(contact: Item)
