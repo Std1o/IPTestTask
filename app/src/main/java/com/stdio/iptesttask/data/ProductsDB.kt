@@ -20,12 +20,6 @@ abstract class ProductsDB : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            INSTANCE?.let { database ->
-                scope.launch {
-                    val wordDao = database.productsDAO()
-                    wordDao.deleteAll()
-                }
-            }
         }
     }
 
@@ -41,8 +35,10 @@ abstract class ProductsDB : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ProductsDB::class.java,
-                    "products_database"
-                ).addCallback(WordDatabaseCallback(scope)).build()
+                    "item"
+                ).createFromAsset("database/data.db")
+                    .addCallback(WordDatabaseCallback(scope))
+                    .build()
                 INSTANCE = instance
                 instance
             }

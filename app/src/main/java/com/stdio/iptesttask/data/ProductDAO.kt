@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDAO {
-    @Query("SELECT * FROM Item ORDER BY time ASC")
+    @Query("SELECT * FROM Item")
     fun getAllProducts(): Flow<List<Item>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
