@@ -27,18 +27,18 @@ import com.stdio.iptesttask.presentation.viewmodel.ProductViewModel
 
 @Composable
 fun MainScreen() {
+    val viewModel = hiltViewModel<ProductViewModel>()
+    val list = viewModel.allProducts.collectAsState(emptyList()).value
+    var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
+    var showDeleteItemDialog by rememberSaveable { mutableStateOf(false) }
+    var selectedItem by rememberSaveable { mutableStateOf(ItemDomain(0, "", "", emptyList(), 0)) }
+    var selectedAmount by rememberSaveable { mutableIntStateOf(0) }
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = {
-            SearchAppBar() {
+            SearchAppBar {
 
             }
         }) { innerPadding ->
-        val viewModel = hiltViewModel<ProductViewModel>()
-        val list = viewModel.allProducts.collectAsState(emptyList()).value
-        var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
-        var showDeleteItemDialog by rememberSaveable { mutableStateOf(false) }
-        var selectedItem by rememberSaveable { mutableStateOf(ItemDomain(0, "", "", emptyList(), 0)) }
-        var selectedAmount by rememberSaveable { mutableIntStateOf(0) }
         LazyColumn(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
             iTems(list, key = { it }) { item ->
                 val shape = RoundedCornerShape(5.dp)
