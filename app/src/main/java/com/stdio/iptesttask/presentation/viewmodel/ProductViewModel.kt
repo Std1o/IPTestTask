@@ -14,11 +14,5 @@ class ProductViewModel @Inject constructor(
     private val repository: ProductsRepository
 ) : ViewModel() {
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.allProducts.collect {
-                println(it)
-            }
-        }
-    }
+    val allProducts = repository.allProducts
 }
