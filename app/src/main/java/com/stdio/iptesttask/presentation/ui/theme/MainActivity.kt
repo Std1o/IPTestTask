@@ -34,10 +34,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.stdio.iptesttask.extensions.iTems
 import com.stdio.iptesttask.presentation.viewmodel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.sql.Date
+import java.text.SimpleDateFormat
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -115,10 +118,26 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                             }
                         }
                     }
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Column {
+                            Text("На складе", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
+                            Text(item.amount.toString(), fontSize = 13.5.sp)
+                        }
+                        Column(modifier = Modifier.align(Alignment.CenterEnd)) {
+                            Text("Дата добавления", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
+                            Text(convertLongToTime(item.time.toLong()), fontSize = 13.5.sp)
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+fun convertLongToTime(time: Long): String {
+    val date = Date(time)
+    val format = SimpleDateFormat("dd.MM.yyyy")
+    return format.format(date)
 }
 
 @Preview(showBackground = true)
