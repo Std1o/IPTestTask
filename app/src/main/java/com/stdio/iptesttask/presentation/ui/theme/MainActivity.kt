@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,10 +22,15 @@ import com.stdio.iptesttask.presentation.viewmodel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.stdio.iptesttask.extensions.iTems
@@ -67,8 +73,21 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                     .fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.fillMaxWidth()) {
                         Text(item.name, fontWeight = FontWeight.Bold)
+                        Row(modifier = Modifier.align(Alignment.CenterEnd)) {
+                            Icon(
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = "Edit Icon",
+                                tint = Purple40
+                            )
+                            Icon(
+                                modifier = Modifier.padding(10.dp, 0.dp, 0.dp ,0.dp),
+                                imageVector = Icons.Default.Delete,
+                                contentDescription = "Delete Icon",
+                                tint = Color.Red
+                            )
+                        }
                     }
                 }
             }
