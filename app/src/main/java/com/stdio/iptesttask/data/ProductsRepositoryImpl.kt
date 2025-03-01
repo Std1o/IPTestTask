@@ -9,15 +9,11 @@ class ProductsRepositoryImpl @Inject constructor(private val productDAO: Product
 
     override val allProducts: Flow<List<Item>> = productDAO.getAllProducts()
 
-    override suspend fun addProduct(contact: Item) {
-        TODO("Not yet implemented")
+    override suspend fun updateProduct(item: Item) {
+        productDAO.update(item)
     }
 
-    override suspend fun updateProduct(contact: Item) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteProduct(contact: Item) {
-        TODO("Not yet implemented")
+    override suspend fun deleteProduct(item: Item) {
+        productDAO.delete(item)
     }
 }

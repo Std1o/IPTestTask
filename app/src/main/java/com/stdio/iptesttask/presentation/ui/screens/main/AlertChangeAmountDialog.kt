@@ -58,7 +58,10 @@ fun AlertChangeAmountDialog(amount: Int, onDismissRequest: () -> Unit, onConfirm
         onDismissRequest = { onDismissRequest() },
         confirmButton = {
             TextButton(
-                onClick = { onConfirm(localAmount) }
+                onClick = {
+                    onConfirm(localAmount)
+                    onDismissRequest()
+                }
             ) {
                 Text(stringResource(id = R.string.apply), color = Purple40)
             }

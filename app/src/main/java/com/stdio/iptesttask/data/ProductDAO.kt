@@ -15,13 +15,13 @@ interface ProductDAO {
     fun getAllProducts(): Flow<List<Item>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(contact: Item)
+    suspend fun insert(item: Item)
 
     @Update
-    suspend fun update(contact: Item)
+    suspend fun update(item: Item)
 
     @Delete
-    suspend fun delete(contact: Item)
+    suspend fun delete(item: Item)
 
     @Query("DELETE FROM Item")
     suspend fun deleteAll()
