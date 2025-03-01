@@ -21,7 +21,7 @@ import com.stdio.iptesttask.domain.model.Item
 import com.stdio.iptesttask.presentation.ui.theme.Purple40
 
 @Composable
-fun MainFirstRow(item: Item, onEdit: () -> Unit) {
+fun MainFirstRow(item: Item, onEdit: (Int) -> Unit) {
     Box(modifier = Modifier.fillMaxWidth()) {
         Text(item.name, fontWeight = FontWeight.Bold)
         Row(modifier = Modifier.align(Alignment.CenterEnd)) {
@@ -29,7 +29,7 @@ fun MainFirstRow(item: Item, onEdit: () -> Unit) {
                 imageVector = Icons.Default.Edit,
                 contentDescription = "Edit Icon",
                 tint = Purple40,
-                modifier = Modifier.clickable { onEdit() }
+                modifier = Modifier.clickable { onEdit(item.amount) }
             )
             Icon(
                 modifier = Modifier.padding(start = 10.dp),

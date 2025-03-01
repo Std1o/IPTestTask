@@ -11,6 +11,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -28,6 +29,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<ProductViewModel>()
     val list = viewModel.allProducts.collectAsState(emptyList()).value
     var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
+    var selectedAmount by rememberSaveable { mutableIntStateOf(0) }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         iTems(list, key = { it }) { item ->
             val shape = RoundedCornerShape(5.dp)
@@ -46,6 +48,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
                     MainFirstRow(item) {
                         showChangeAmountDialog = true
+                        selectedAmount = it
                     }
                     MainSecondRow(item)
                     MainThirdRow(item)
@@ -55,7 +58,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
     }
 
     if (showChangeAmountDialog) {
-        AlertChangeAmountDialog { showChangeAmountDialog = false }
+        AlertChangeAmountDialog(selectedAmount) { showChangeAmountDialog = false }
     }
 }
 
