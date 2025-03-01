@@ -10,6 +10,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -23,6 +27,7 @@ import java.util.Date
 fun MainScreen(modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<ProductViewModel>()
     val list = viewModel.allProducts.collectAsState(emptyList()).value
+    var showChangeAmountDialog by rememberSaveable { mutableStateOf(false) }
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         iTems(list, key = { it }) { item ->
             val shape = RoundedCornerShape(5.dp)
@@ -39,12 +44,18 @@ fun MainScreen(modifier: Modifier = Modifier) {
                     .fillMaxWidth()
             ) {
                 Column(modifier = Modifier.padding(vertical = 8.dp, horizontal = 16.dp)) {
-                    MainFirstRow(item)
+                    MainFirstRow(item) {
+                        showChangeAmountDialog = true
+                    }
                     MainSecondRow(item)
                     MainThirdRow(item)
                 }
             }
         }
+    }
+
+    if (showChangeAmountDialog) {
+        AlertChangeAmountDialog { showChangeAmountDialog = false }
     }
 }
 

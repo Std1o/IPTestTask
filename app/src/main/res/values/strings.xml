@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">IP Test Task</string>
+
+    <string name="amount_dialog">Количество товара</string>
+    <string name="apply">Принять</string>
+    <string name="cancel">Отмена</string>
 </resources>
