@@ -9,11 +9,12 @@ import java.util.Date
 class ItemReverseMapper : Mapper<ItemDomain, Item> {
     override fun map(input: ItemDomain): Item {
         val time = convertLongToTime(input.time)
+        val tags = input.tags.map { it.trim() }
         return Item(
             id = input.id,
             name = input.name,
             time = time,
-            tags = input.tags.toString(),
+            tags = tags.toString(),
             amount = input.amount
         )
     }
