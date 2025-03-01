@@ -1,5 +1,6 @@
 package com.stdio.iptesttask.presentation.ui.screens.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -21,7 +26,8 @@ import com.stdio.iptesttask.presentation.ui.components.CirclePlus
 import com.stdio.iptesttask.presentation.ui.theme.Purple40
 
 @Composable
-fun AlertChangeAmountDialog(amount: Int, onDismissRequest: () -> Unit) {
+fun AlertChangeAmountDialog(amount: Int, onDismissRequest: () -> Unit, onConfirm: (Int) -> Unit) {
+    var localAmount by rememberSaveable { mutableIntStateOf(amount) }
     AlertDialog(
         icon = {
             Icon(
@@ -37,20 +43,22 @@ fun AlertChangeAmountDialog(amount: Int, onDismissRequest: () -> Unit) {
                 Icon(
                     imageVector = CircleMinus,
                     contentDescription = "Change Amount Icon",
-                    tint = Purple40
+                    tint = Purple40,
+                    modifier = Modifier.clickable { --localAmount }
                 )
-                Text(amount.toString(), modifier = Modifier.padding(horizontal = 10.dp))
+                Text(localAmount.toString(), modifier = Modifier.padding(horizontal = 10.dp))
                 Icon(
                     imageVector = CirclePlus,
                     contentDescription = "Change Amount Icon",
-                    tint = Purple40
+                    tint = Purple40,
+                    modifier = Modifier.clickable { ++localAmount }
                 )
             }
         },
         onDismissRequest = { onDismissRequest() },
         confirmButton = {
             TextButton(
-                onClick = { onDismissRequest() }
+                onClick = { onConfirm(localAmount) }
             ) {
                 Text(stringResource(id = R.string.apply), color = Purple40)
             }
