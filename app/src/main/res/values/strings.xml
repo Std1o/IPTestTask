@@ -8,4 +8,6 @@
     <string name="no">Нет</string>
     <string name="deletion_dialog_title">Удаление товара</string>
     <string name="deletion_dialog_description">Вы действительно хотите удалить выбранный товар?</string>
+    <string name="app_bar_title">Список товаров</string>
+    <string name="hint_search_query">Поиск товаров</string>
 </resources>
