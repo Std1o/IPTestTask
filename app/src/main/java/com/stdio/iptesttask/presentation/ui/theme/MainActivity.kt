@@ -4,14 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -53,6 +56,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val viewModel = hiltViewModel<ProductViewModel>()
@@ -89,19 +93,22 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                             )
                         }
                     }
-                    Row {
-                        LazyRow {
-                            iTems(item.tags.split(","), key = { it }) { tag ->
-                                OutlinedButton(
-                                    onClick = {}, shape = RoundedCornerShape(16),
-                                    modifier = Modifier.padding(end = 10.dp)
-                                ) {
-                                    Text(
-                                        tag.replace("[", "")
-                                            .replace("\"", "")
-                                            .replace("]", "")
-                                    )
-                                }
+                    FlowRow(
+                        horizontalArrangement = Arrangement.spacedBy(7.dp),
+                        verticalArrangement = Arrangement.spacedBy(7.dp),
+                    ) {
+                        item.tags.split(",").forEach { tag ->
+                            OutlinedButton(
+                                onClick = {}, shape = RoundedCornerShape(16),
+                                contentPadding = PaddingValues(
+                                    10.dp
+                                )
+                            ) {
+                                Text(
+                                    tag.replace("[", "")
+                                        .replace("\"", "")
+                                        .replace("]", "")
+                                )
                             }
                         }
                     }
