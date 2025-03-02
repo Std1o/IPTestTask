@@ -21,7 +21,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): ProductsDB {
-        return ProductsDB.getDatabase(appContext, CoroutineScope(SupervisorJob()))
+        return ProductsDB.getDatabase(appContext)
     }
 
     @Provides

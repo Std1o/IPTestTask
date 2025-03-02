@@ -4,7 +4,6 @@ import com.stdio.iptesttask.data.model.Item
 import com.stdio.iptesttask.domain.Mapper
 import com.stdio.iptesttask.domain.model.ItemDomain
 import java.text.SimpleDateFormat
-import java.util.Date
 
 class ItemReverseMapper : Mapper<ItemDomain, Item> {
     override fun map(input: ItemDomain): Item {

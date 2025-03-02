@@ -12,7 +12,8 @@ import javax.inject.Inject
 class ProductsRepositoryImpl @Inject constructor(private val productDAO: ProductDAO) :
     ProductsRepository {
 
-    override fun allProducts(prefix: String): Flow<List<ItemDomain>> = productDAO.getFilteredProducts(prefix).map { list ->
+    override fun allProducts(prefix: String): Flow<List<ItemDomain>> =
+        productDAO.getFilteredProducts(prefix).map { list ->
             list.map { item ->
                 val itemMapper = ItemMapper()
                 itemMapper.map(item)
