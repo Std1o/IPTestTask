@@ -23,7 +23,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusRequester
@@ -45,13 +44,64 @@ fun SearchAppBar(actions: @Composable RowScope.() -> Unit = {}, onQueryChanged: 
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
 
-    if (collapsed) {
-        TopAppBar(
-            colors = TopAppBarDefaults.topAppBarColors(
-                containerColor = White,
-            ),
-            title = { Text(text = stringResource(id = R.string.app_bar_title), fontSize = 16.sp) },
-            actions = {
+
+    TopAppBar(
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = White,
+        ),
+        title = {
+            if (collapsed) {
+                Text(text = stringResource(id = R.string.app_bar_title), fontSize = 16.sp)
+            } else {
+                TextField(
+                    value = query,
+                    onValueChange = { newQuery ->
+                        query = newQuery
+                        onQueryChanged(newQuery)
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Rounded.Search,
+                            tint = MaterialTheme.colors.onBackground,
+                            contentDescription = "Search Icon"
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(onClick = {
+                            if (query.isEmpty()) collapsed = true
+                            else {
+                                query = ""
+                                onQueryChanged("")
+                            }
+                        }) {
+                            Icon(
+                                imageVector = Icons.Rounded.Clear,
+                                tint = MaterialTheme.colors.onBackground,
+                                contentDescription = "Clear Icon"
+                            )
+                        }
+                    },
+                    maxLines = 1,
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = White,
+                        unfocusedContainerColor = White,
+                        disabledContainerColor = White
+                    ),
+                    placeholder = { Text(text = stringResource(R.string.hint_search_query)) },
+                    textStyle = MaterialTheme.typography.subtitle1,
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Text,
+                        capitalization = KeyboardCapitalization.Sentences
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .focusRequester(focusRequester)
+                )
+            }
+        },
+        actions = {
+            if (collapsed) {
                 IconButton(onClick = { collapsed = false }) {
                     Icon(
                         imageVector = Icons.Filled.Search,
@@ -59,56 +109,10 @@ fun SearchAppBar(actions: @Composable RowScope.() -> Unit = {}, onQueryChanged: 
                     )
                 }
                 actions()
-            },
-            modifier = Modifier.shadow(elevation = 5.dp)
-        )
-    } else {
-        TextField(
-            value = query,
-            onValueChange = { newQuery ->
-                query = newQuery
-                onQueryChanged(newQuery)
-            },
-            leadingIcon = {
-                Icon(
-                    imageVector = Icons.Rounded.Search,
-                    tint = MaterialTheme.colors.onBackground,
-                    contentDescription = "Search Icon"
-                )
-            },
-            trailingIcon = {
-                IconButton(onClick = {
-                    if (query.isEmpty()) collapsed = true
-                    else {
-                        query = ""
-                        onQueryChanged("")
-                    }
-                }) {
-                    Icon(
-                        imageVector = Icons.Rounded.Clear,
-                        tint = MaterialTheme.colors.onBackground,
-                        contentDescription = "Clear Icon"
-                    )
-                }
-            },
-            maxLines = 1,
-            colors = TextFieldDefaults.colors(
-                focusedContainerColor = White,
-                unfocusedContainerColor = White,
-                disabledContainerColor = White
-            ),
-            placeholder = { Text(text = stringResource(R.string.hint_search_query)) },
-            textStyle = MaterialTheme.typography.subtitle1,
-            singleLine = true,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                capitalization = KeyboardCapitalization.Sentences
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .focusRequester(focusRequester)
-        )
-    }
+            }
+        },
+        modifier = Modifier.shadow(elevation = 5.dp)
+    )
 
     LaunchedEffect(collapsed) {
         if (!collapsed) {
