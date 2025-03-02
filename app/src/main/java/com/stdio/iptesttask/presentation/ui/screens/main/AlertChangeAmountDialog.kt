@@ -45,7 +45,7 @@ fun AlertChangeAmountDialog(amount: Int, onDismissRequest: () -> Unit, onConfirm
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                 Icon(
                     imageVector = CircleMinus,
-                    contentDescription = "Change Amount Icon",
+                    contentDescription = "Minus",
                     tint = Purple40,
                     modifier = Modifier
                         .size(30.dp)
@@ -58,7 +58,7 @@ fun AlertChangeAmountDialog(amount: Int, onDismissRequest: () -> Unit, onConfirm
                 )
                 Icon(
                     imageVector = CirclePlus,
-                    contentDescription = "Change Amount Icon",
+                    contentDescription = "Plus",
                     tint = Purple40,
                     modifier = Modifier
                         .size(30.dp)

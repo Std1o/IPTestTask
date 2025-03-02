@@ -14,7 +14,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -40,7 +39,11 @@ fun MainScreen() {
                 viewModel.prefix = it
             }
         }) { innerPadding ->
-        LazyColumn(modifier = Modifier.padding(innerPadding).fillMaxSize()) {
+        LazyColumn(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+        ) {
             iTems(list, key = { it }) { item ->
                 val shape = RoundedCornerShape(5.dp)
                 Card(
@@ -87,5 +90,5 @@ fun MainScreen() {
                 viewModel.deleteItem(it)
             }
         }
-        }
+    }
 }

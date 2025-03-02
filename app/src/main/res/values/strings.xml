@@ -10,4 +10,6 @@
     <string name="deletion_dialog_description">Вы действительно хотите удалить выбранный товар?</string>
     <string name="app_bar_title">Список товаров</string>
     <string name="hint_search_query">Поиск товаров</string>
+    <string name="amount">На складе</string>
+    <string name="date">Дата добавления</string>
 </resources>
